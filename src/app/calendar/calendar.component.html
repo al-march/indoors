@@ -1,7 +1,14 @@
 <div class="h-full flex flex-col gap-4 pb-4">
   <app-header></app-header>
 
-  <app-navigation></app-navigation>
+  <app-navigation
+    [month]="month"
+    (prev)="prev()"
+    (next)="next()">
+  </app-navigation>
 
-  <app-month class="flex-1"></app-month>
+  <app-month
+    class="flex-1"
+    [month]="month">
+  </app-month>
 </div>

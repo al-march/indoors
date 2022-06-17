@@ -1,12 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import dayjs, { Dayjs } from 'dayjs';
 
 @Component({
   selector: 'app-month',
   templateUrl: './month.component.html',
-  styleUrls: ['./month.component.css']
+  styleUrls: ['./month.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MonthComponent implements OnInit {
+export class MonthComponent implements OnInit, OnChanges {
 
   @Input()
   month = dayjs();
@@ -16,7 +17,12 @@ export class MonthComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.days = this.getMonthDays(this.month);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['month'].currentValue) {
+      this.days = this.getMonthDays(this.month);
+    }
   }
 
   getMonthDays(month: Dayjs) {
