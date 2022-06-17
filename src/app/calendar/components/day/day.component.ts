@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import dayjs  from 'dayjs';
+import { Day } from '@calendar/models';
 
 @Component({
   selector: 'app-day',
@@ -9,11 +9,10 @@ import dayjs  from 'dayjs';
 export class DayComponent implements OnInit {
 
   @Input()
-  day = dayjs();
+  day?: Day;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
-
 }

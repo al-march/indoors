@@ -1,0 +1,8 @@
+<div
+  *ngIf="day"
+  class="day"
+  [class.is-today]="day.isToday"
+  [class.is-weekend]="day.isWeekend"
+>
+  <span class="opacity-80">{{day.date.format('D')}}</span>
+</div>

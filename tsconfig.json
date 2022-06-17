@@ -23,7 +23,11 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@components/*": ["src/app/components/*"],
+      "@calendar/*": ["src/app/calendar/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

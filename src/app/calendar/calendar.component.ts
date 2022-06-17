@@ -16,12 +16,11 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  next() {
-    this.month = this.month.add(1, 'month');
-  }
-
   prev() {
     this.month = this.month.subtract(1, 'month');
   }
 
+  next() {
+    this.month = this.month.add(1, 'month');
+  }
 }

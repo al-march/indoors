@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '@components/navbar';
 import { CalendarComponent } from './calendar.component';
-import { HeaderComponent } from './header/header.component';
-import { MonthComponent } from './month/month.component';
-import { DayComponent } from './day/day.component';
-import { NavigationComponent } from './navigation/navigation.component';
-
+import {
+  DayComponent,
+  HeaderComponent,
+  MonthComponent,
+  NavigationComponent
+} from './components';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     CalendarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NavbarComponent
   ]
 })
-export class CalendarModule { }
+export class CalendarModule {}
