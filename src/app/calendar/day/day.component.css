@@ -1,0 +1,14 @@
+.day {
+  @apply
+  h-full
+  w-full
+  m-auto
+  flex
+  relative
+  transition-opacity
+  text-sm
+  p-2
+  rounded-none
+  ring-1
+  ring-base-200
+}
