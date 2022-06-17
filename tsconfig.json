@@ -26,7 +26,8 @@
     ],
     "paths": {
       "@components/*": ["src/app/components/*"],
-      "@calendar/*": ["src/app/calendar/*"]
+      "@calendar/*": ["src/app/calendar/*"],
+      "@storage/*": ["src/app/core/storage/*"],
     }
   },
   "angularCompilerOptions": {

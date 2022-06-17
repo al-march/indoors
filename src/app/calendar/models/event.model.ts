@@ -1,8 +1,6 @@
-import { Dayjs } from 'dayjs';
-
 export class CalendarEvent {
   constructor(
-    public day: Dayjs,
+    public date: string,
     public message: string,
     public people: string[],
   ) {}
