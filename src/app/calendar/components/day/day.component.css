@@ -14,14 +14,14 @@
   bg-base-100
 }
 
-.day.is-today {
-  @apply
-  bg-primary
-  text-primary-content
-}
-
 .day.is-weekend {
   @apply
   bg-warning
   text-warning-content
+}
+
+.day.is-today {
+  @apply
+  bg-primary
+  text-primary-content
 }

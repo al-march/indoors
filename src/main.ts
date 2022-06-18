@@ -5,9 +5,9 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
-import weekday from 'dayjs/plugin/weekday';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
+import isoWeek from 'dayjs/plugin/isoWeek.js';
+import weekday from 'dayjs/plugin/weekday.js';
+import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import 'dayjs/locale/ru'
 
 dayjs.extend(isoWeek);

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractStorage } from '@storage/abstract.storage';
 import { CalendarEvent } from '@calendar/models';
-import dayjs from 'dayjs';
 import { Subject } from 'rxjs';
 
 interface CalendarStorageState {
@@ -13,7 +12,7 @@ interface CalendarStorageState {
 })
 export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
 
-  private update$$ = new Subject();
+  private update$$ = new Subject<Partial<CalendarStorageState>>();
   valueChange$ = this.update$$.asObservable();
 
   constructor() {
@@ -21,9 +20,8 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
   }
 
   async setEvent(event: CalendarEvent) {
-    const date = dayjs(event.date);
-    const item = {[+date.toDate()]: event};
-    this.set('events', item);
+    const events = await this.getEvents();
+    this.set('events', {...events, [event.date]: event});
     this.update$$.next(this.getState());
   }
 
