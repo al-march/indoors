@@ -19,4 +19,26 @@
       </div>
     </div>
   </div>
+  <button
+    class="btn btn-sm btn-ghost ml-2"
+    [appPopup]="popup"
+    [offset]="[0, 5]"
+  >
+    <i class="fa-solid fa-palette"></i>
+  </button>
+
+  <app-popup #popup="popup">
+    <ul class="menu bg-base-200 shadow-2xl rounded-box">
+      <li (click)="setTheme(themes.light)">
+        <a [class.active]="theme === themes.light">
+          <i class="fa-solid fa-sun"></i>
+        </a>
+      </li>
+      <li (click)="setTheme(themes.dark)">
+        <a [class.active]="theme === themes.dark">
+          <i class="fa-solid fa-moon"></i>
+        </a>
+      </li>
+    </ul>
+  </app-popup>
 </app-navbar>

@@ -8,6 +8,7 @@ import {
   MonthComponent,
   NavigationComponent
 } from './components';
+import { PopupModule } from '@components/popup';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {
   ],
   imports: [
     CommonModule,
-    NavbarComponent
+    NavbarComponent,
+    PopupModule
   ]
 })
 export class CalendarModule {}
