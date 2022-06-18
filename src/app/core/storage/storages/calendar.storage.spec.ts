@@ -20,8 +20,8 @@ describe('CalendarStorage', () => {
       people: ['Darya Ivanova'],
     };
     await storage.setEvent(event);
-    const storageEvent = await storage.getEvent(+date.toDate());
-    expect(storageEvent).toEqual(event);
+    const storageEvent = await storage.getEvent(+date.startOf('day').toDate());
+    expect(storageEvent).toEqual([event]);
   });
   it('should get all events', async () => {
     const today = dayjs();
@@ -42,8 +42,25 @@ describe('CalendarStorage', () => {
 
     const events = await storage.getEvents();
 
-    expect(events[+today.toDate()]).toEqual(event1);
-    expect(events[+yesterday.toDate()]).toEqual(event2);
+    expect(Object.values(events).length).toEqual(2);
+    expect(events[+today.startOf('day').toDate()]).toEqual([event1]);
+    expect(events[+yesterday.startOf('day').toDate()]).toEqual([event2]);
+  });
+  it('should accumulate events of day', async () => {
+    const event = {
+      date: +dayjs().toDate(),
+      message: 'message',
+      people: []
+    };
+    await storage.setEvent(event);
+    await storage.setEvent(event);
+
+    const events = await storage.getEvents();
+    const todayKey = +dayjs().startOf('day').toDate();
+
+    expect(Object.values(events).length).toBe(1);
+    expect(events[todayKey].length).toBe(2)
+    expect(events[todayKey][0]).toEqual(event)
   });
   it('should emit new event', async () => {
     const date = dayjs();
@@ -53,12 +70,11 @@ describe('CalendarStorage', () => {
       people: ['Darya Ivanova'],
     };
 
-    storage.valueChange$.subscribe((state) => {
-      expect(state.events).toBeTruthy();
-      const events = state.events;
+    storage.eventsChange$.subscribe((events) => {
+      expect(events).toBeTruthy();
       if (events) {
-        const e = events[+date.toDate()];
-        expect(e).toEqual(event);
+        const e = events[+date.startOf('day').toDate()];
+        expect(e).toEqual([event]);
       }
     });
 
