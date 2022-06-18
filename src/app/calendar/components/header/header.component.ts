@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AppStorage, Theme } from '@storage/storages';
+import { CreateEventPopupSubmit } from '@calendar/components/header/create-event-popup/create-event-popup.component';
+import { CalendarEvent } from '@calendar/models';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +10,10 @@ import { AppStorage, Theme } from '@storage/storages';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
+
+  @Output()
+  createEvent = new EventEmitter<CalendarEvent>();
+
   themes = {
     dark: Theme.DARK,
     light: Theme.LIGHT
@@ -26,5 +32,15 @@ export class HeaderComponent implements OnInit {
 
   setTheme(theme: Theme) {
     this.appStorage.setTheme(theme);
+  }
+
+  onCreateEvent(data: CreateEventPopupSubmit) {
+    console.log(data);
+    const event: CalendarEvent = {
+      date: +data.date.toDate(),
+      message: data.message,
+      people: []
+    };
+    this.createEvent.emit(event);
   }
 }

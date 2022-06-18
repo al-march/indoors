@@ -1,5 +1,7 @@
 <div class="h-full flex flex-col gap-4 pb-4">
-  <app-header></app-header>
+  <app-header
+    (createEvent)="createEvent($event)">
+  </app-header>
 
   <app-navigation
     [month]="month"
@@ -9,6 +11,7 @@
 
   <app-month
     class="flex-1"
-    [date]="month">
+    [date]="month"
+    [events]="(events$ | async) || {}">
   </app-month>
 </div>

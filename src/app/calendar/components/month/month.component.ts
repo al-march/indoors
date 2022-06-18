@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import dayjs from 'dayjs';
-import { Month, Day } from '@calendar/models';
+import { Month, Day, CalendarEvent } from '@calendar/models';
 
 @Component({
   selector: 'app-month',
@@ -13,6 +13,9 @@ export class MonthComponent implements OnInit, OnChanges {
   @Input()
   date = dayjs();
 
+  @Input()
+  events: Record<number, CalendarEvent> = {};
+
   month: Month = new Month(dayjs());
   days: Day[] = [];
 
@@ -22,7 +25,7 @@ export class MonthComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['date'].currentValue) {
+    if (changes['date']) {
       const month = new Month(this.date);
       this.month = month;
       this.days = month.getMonthDays();

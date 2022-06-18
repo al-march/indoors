@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
+import { CalendarStorage } from '@storage/storages';
+import { CalendarEvent } from '@calendar/models';
 
 @Component({
   selector: 'app-calendar',
@@ -10,8 +12,11 @@ import dayjs from 'dayjs';
 export class CalendarComponent implements OnInit {
 
   month = dayjs();
+  events$ = this.calendar.eventsChange$;
 
-  constructor() { }
+  constructor(
+    private calendar: CalendarStorage
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,5 +27,9 @@ export class CalendarComponent implements OnInit {
 
   next() {
     this.month = this.month.add(1, 'month');
+  }
+
+  createEvent(event: CalendarEvent) {
+    return this.calendar.setEvent(event);
   }
 }

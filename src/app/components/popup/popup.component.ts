@@ -27,6 +27,7 @@ export class PopupComponent {
   }
 
   close() {
+    console.log('close popup');
     this.show = false;
   }
 }

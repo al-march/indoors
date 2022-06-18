@@ -1,15 +1,24 @@
-<div class="card w-96 bg-base-300 shadow-xl">
+<div class="card w-96 bg-base-100 shadow-xl">
   <header class="flex justify-end p-1">
-    <button class="btn btn-sm btn-ghost" (close)="close.emit()">
+    <button class="btn btn-sm btn-ghost" (click)="onClose()">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </header>
-  <section class="card-body pt-2">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card-body pt-2">
     <input
       type="text"
       class="input input-bordered"
-      placeholder="6 марта, 14.00, день рождения"
+      placeholder="6 марта, 14.00"
+      formControlName="date"
+      [class.input-error]="date?.touched && date?.invalid"
     >
-    <button class="btn btn-primary btn-sm">Создать</button>
-  </section>
+    <input
+      type="text"
+      class="input input-bordered"
+      placeholder="День рождения"
+      formControlName="message"
+      [class.input-error]="message?.touched && message?.invalid"
+    >
+    <button type="submit" class="btn btn-primary btn-sm">Создать</button>
+  </form>
 </div>

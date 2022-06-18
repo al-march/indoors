@@ -7,7 +7,7 @@ export class Month {
   ) {}
 
   getMonthDays() {
-    const clone = this.date.clone();
+    const clone = this.date.clone().startOf('month');
     const monthDays = getDaysOfMonth(clone);
     const daysBefore = getDaysBefore(monthDays[0].date);
     const daysAfter = getDaysAfter(monthDays[monthDays.length - 1].date);
@@ -20,7 +20,7 @@ export class Month {
 
       let count = 1;
       while (count <= allDays) {
-        const date = dayjs(new Date(currentMonth.year(), currentMonth.month(), count));
+        const date = dayjs(new Date(currentMonth.year(), currentMonth.month(), count)).startOf('day');
         output.push(new Day(date));
         count++;
       }

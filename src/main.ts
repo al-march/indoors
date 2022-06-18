@@ -8,12 +8,14 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek.js';
 import weekday from 'dayjs/plugin/weekday.js';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
-import 'dayjs/locale/ru'
+import customParseFormat from 'dayjs/plugin/customParseFormat.js';
+import 'dayjs/locale/ru';
 
 dayjs.extend(isoWeek);
 dayjs.extend(weekday);
 dayjs.extend(localizedFormat);
-dayjs.locale('ru')
+dayjs.extend(customParseFormat);
+dayjs.locale('ru');
 
 if (environment.production) {
   enableProdMode();

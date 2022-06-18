@@ -4,6 +4,7 @@ import { createPopper, Instance, Placement } from '@popperjs/core';
 
 @Directive({
   selector: '[appPopup]',
+  exportAs: 'popupTrigger'
 })
 export class PopupDirective implements OnChanges {
 
@@ -48,15 +49,16 @@ export class PopupDirective implements OnChanges {
 
   open() {
     if (this.appPopup) {
-      this.appPopup.show = true;
+      this.appPopup.open();
       this.instance?.destroy();
       this.createPopper();
     }
   }
 
   close() {
+    console.log('close from directive');
     if (this.appPopup) {
-      this.appPopup.show = false;
+      this.appPopup.close();
       this.instance?.destroy();
     }
   }
@@ -69,6 +71,10 @@ export class PopupDirective implements OnChanges {
     if (target instanceof HTMLElement) {
       if (trigger.contains(target)) {
         this.onTriggerClick();
+        return;
+      }
+
+      if (!this.appPopup?.show) {
         return;
       }
 
@@ -87,7 +93,7 @@ export class PopupDirective implements OnChanges {
 
   onInsideClick() {
     this.insideClick.emit();
-    if (this.closeOnOutsideClick) {
+    if (this.closeOnInsideClick) {
       this.close();
     }
   }
