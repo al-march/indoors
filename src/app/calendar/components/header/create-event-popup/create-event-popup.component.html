@@ -1,0 +1,15 @@
+<div class="card w-96 bg-base-300 shadow-xl">
+  <header class="flex justify-end p-1">
+    <button class="btn btn-sm btn-ghost" (close)="close.emit()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </header>
+  <section class="card-body pt-2">
+    <input
+      type="text"
+      class="input input-bordered"
+      placeholder="6 марта, 14.00, день рождения"
+    >
+    <button class="btn btn-primary btn-sm">Создать</button>
+  </section>
+</div>
