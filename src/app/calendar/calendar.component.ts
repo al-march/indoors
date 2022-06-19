@@ -32,4 +32,8 @@ export class CalendarComponent implements OnInit {
   createEvent(event: CalendarEvent) {
     return this.calendar.setEvent(event);
   }
+
+  today() {
+    this.month = dayjs();
+  }
 }

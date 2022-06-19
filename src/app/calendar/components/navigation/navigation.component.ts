@@ -18,6 +18,9 @@ export class NavigationComponent implements OnInit {
   @Output()
   next = new EventEmitter();
 
+  @Output()
+  today = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
