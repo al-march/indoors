@@ -35,8 +35,24 @@
         <button
           *ngFor="let event of events"
           class="event"
+
+          #editTrigger="popupTrigger"
+          [appPopup]="editEventPopup"
+          [offset]="[0, 10]"
+          [closeOnInsideClick]="false"
+          [class.accent]="editEventPopup.show"
+          placement="right-start"
         >
           {{event.title}}
+
+          <app-popup #editEventPopup="popup">
+            <app-day-event-popup
+              [day]="day.date"
+              [event]="event"
+              (close)="editTrigger.close()"
+              (edit)="onEditEvent($event); editTrigger.close()">
+            </app-day-event-popup>
+          </app-popup>
         </button>
       </div>
     </div>

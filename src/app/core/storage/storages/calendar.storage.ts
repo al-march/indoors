@@ -8,6 +8,10 @@ interface CalendarStorageState {
   events: Record<number, CalendarEvent[]>;
 }
 
+const generateUUID = () => {
+  return crypto.randomUUID();
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +30,7 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
   }
 
   async setEvent(event: CalendarEvent) {
+    event.id = generateUUID();
     const events = await this.getEvents();
     const key = +dayjs(event.date).startOf('day').toDate();
     const day = events[key];
@@ -36,12 +41,35 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
       this.set('events', {...events, [key]: [event]});
     }
     this.state$$.next(this.getState());
+    return event;
   }
 
-  async getEvent(date: number): Promise<CalendarEvent[] | []> {
+  async getDayEvents(date: number): Promise<CalendarEvent[]> {
     const events = await this.getEvents();
-    const event = events[date];
-    return event || [];
+    return events[date];
+  }
+
+  async getEvent(event: CalendarEvent): Promise<CalendarEvent | undefined> {
+    if (!event.id) {
+      throw new Error('Event ID is required');
+    }
+    const startOfDay = +dayjs(event.date).startOf('day').toDate();
+    const dayEvents = await this.getDayEvents(startOfDay);
+    return dayEvents.find(e => e.id === event.id);
+  }
+
+  async updateEvent(event: CalendarEvent): Promise<CalendarEvent> {
+    const item = await this.getEvent(event);
+    if (item) {
+      item.title = event.title;
+      item.date = event.date;
+      item.people = event.people;
+      item.message = event.message;
+
+      this.update();
+      return item;
+    }
+    throw new Error(`Event with id: ${event.id} not found`);
   }
 
   async getEvents(): Promise<Record<number, CalendarEvent[]>> {

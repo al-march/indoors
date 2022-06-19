@@ -13,10 +13,20 @@ export class CalendarEventFormComponent implements OnInit {
   @Input()
   date?: Dayjs;
 
+  @Input()
+  event?: CalendarEvent;
+
   @Output()
   create = new EventEmitter<CalendarEvent>();
 
+  @Output()
+  edit = new EventEmitter<CalendarEvent>();
+
   format = 'D, MMMM, YYYY';
+
+  get isEdit() {
+    return !!this.event;
+  }
 
   form = this.fb.group({
     title: ['', Validators.required],
@@ -49,6 +59,15 @@ export class CalendarEventFormComponent implements OnInit {
     if (this.date) {
       this.dateInput?.setValue(this.date.format(this.format));
     }
+
+    if (this.isEdit) {
+      this.form.patchValue({
+        title: this.event?.title || '',
+        date: dayjs(this.event?.date)?.format(this.format) || '',
+        message: this.event?.message || '',
+        people: this.event?.people?.join(', ')
+      });
+    }
   }
 
   onSubmit() {
@@ -62,16 +81,23 @@ export class CalendarEventFormComponent implements OnInit {
     const parseDate = () => +dayjs(this.dateInput?.value, this.format, 'ru').toDate();
 
     const event: CalendarEvent = {
+      id: this.event?.id || '',
       title: this.titleInput?.value || '',
       date: parseDate(),
       people: this.peopleInput?.value?.split(' ') || [''],
       message: this.messageInput?.value || ''
     };
 
-    this.create.emit(event);
+    this.emitSubmit(event);
 
     this.form.reset({
       date: this.date?.format(this.format) || ''
     });
+  }
+
+  emitSubmit(event: CalendarEvent) {
+    this.isEdit
+      ? this.edit.emit(event)
+      : this.create.emit(event);
   }
 }

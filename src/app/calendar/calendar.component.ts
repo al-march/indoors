@@ -31,7 +31,16 @@ export class CalendarComponent implements OnInit {
 
   createEvent(event: CalendarEvent) {
     this.month = dayjs(event.date);
-    return this.calendar.setEvent(event);
+    return this.calendar.setEvent(event).catch(e => {
+      alert(e);
+    });
+  }
+
+  editEvent(event: CalendarEvent) {
+    this.month = dayjs(event.date);
+    return this.calendar.updateEvent(event).catch(e => {
+      alert(e);
+    });
   }
 
   today() {

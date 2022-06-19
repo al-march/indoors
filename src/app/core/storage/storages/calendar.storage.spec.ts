@@ -12,15 +12,28 @@ describe('CalendarStorage', () => {
   it('should create an instance', () => {
     expect(storage).toBeTruthy();
   });
-  it('should set/get event', async () => {
+
+  it('should create event', async () => {
     const date = dayjs();
     const event: CalendarEvent = {
       date: +date.toDate(),
-      message: 'new event',
+      title: 'new event',
+      people: ['Darya Ivanova'],
+    };
+    const eventWithId = await storage.setEvent(event);
+    const storageEvent = await storage.getEvent(eventWithId);
+    expect(storageEvent).toBeTruthy();
+  });
+
+  it('should get event by day', async () => {
+    const date = dayjs();
+    const event: CalendarEvent = {
+      date: +date.toDate(),
+      title: 'new event',
       people: ['Darya Ivanova'],
     };
     await storage.setEvent(event);
-    const storageEvent = await storage.getEvent(+date.startOf('day').toDate());
+    const storageEvent = await storage.getDayEvents(+date.startOf('day').toDate());
     expect(storageEvent).toEqual([event]);
   });
   it('should get all events', async () => {
@@ -28,12 +41,12 @@ describe('CalendarStorage', () => {
     const yesterday = today.subtract(1, 'day');
     const event1: CalendarEvent = {
       date: +today.toDate(),
-      message: 'today event',
+      title: 'today event',
       people: [],
     };
     const event2: CalendarEvent = {
       date: +yesterday.toDate(),
-      message: 'yesterday event',
+      title: 'yesterday event',
       people: [],
     };
 
@@ -49,8 +62,7 @@ describe('CalendarStorage', () => {
   it('should accumulate events of day', async () => {
     const event = {
       date: +dayjs().toDate(),
-      message: 'message',
-      people: []
+      title: 'message',
     };
     await storage.setEvent(event);
     await storage.setEvent(event);
@@ -59,14 +71,14 @@ describe('CalendarStorage', () => {
     const todayKey = +dayjs().startOf('day').toDate();
 
     expect(Object.values(events).length).toBe(1);
-    expect(events[todayKey].length).toBe(2)
-    expect(events[todayKey][0]).toEqual(event)
+    expect(events[todayKey].length).toBe(2);
+    expect(events[todayKey][0]).toEqual(event);
   });
   it('should emit new event', async () => {
     const date = dayjs();
     const event: CalendarEvent = {
       date: +date.toDate(),
-      message: 'new event',
+      title: 'new event',
       people: ['Darya Ivanova'],
     };
 

@@ -27,6 +27,9 @@ export class MonthComponent implements OnInit, OnChanges {
   @Output()
   createEvent = new EventEmitter<CalendarEvent>();
 
+  @Output()
+  editEvent = new EventEmitter<CalendarEvent>();
+
   week = this.getWeek();
   month: Month = new Month(dayjs());
   days: Day[] = [];
@@ -65,6 +68,10 @@ export class MonthComponent implements OnInit, OnChanges {
 
   onCreateEvent(event: CalendarEvent) {
     this.createEvent.emit(event);
+  }
+
+  onEditEvent(event: CalendarEvent) {
+    this.editEvent.emit(event)
   }
 
   getWeek() {

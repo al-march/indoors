@@ -38,3 +38,8 @@
   inline-block
   truncate
 }
+
+.event.accent {
+  @apply
+  btn-accent
+}

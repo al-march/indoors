@@ -1,6 +1,10 @@
 <div class="card w-72 p-3 rounded bg-base-200 shadow-xl">
   <header class="flex items-center justify-between">
-    <h4 class="text-center pt-2">{{day?.format('DD MMMM')}}</h4>
+    <h4 class="text-center">
+      {{day?.format('DD MMMM')}}
+      <span *ngIf="event" class="opacity-60 text-sm">Редактирование</span>
+      <span *ngIf="!event" class="opacity-60 text-sm">Новое</span>
+    </h4>
     <button class="btn btn-xs btn-ghost" (click)="close.emit()">
       <i class="fa-solid fa-xmark"></i>
     </button>
@@ -10,6 +14,8 @@
 
   <app-calendar-event-form
     [date]="day"
-    (create)="create.emit($event)">
+    [event]="event"
+    (create)="create.emit($event)"
+    (edit)="edit.emit($event)">
   </app-calendar-event-form>
 </div>

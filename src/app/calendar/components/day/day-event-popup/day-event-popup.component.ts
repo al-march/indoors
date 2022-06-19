@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { CalendarEvent } from '@calendar/models';
 
 @Component({
@@ -10,13 +10,19 @@ import { CalendarEvent } from '@calendar/models';
 export class DayEventPopupComponent implements OnInit {
 
   @Input()
-  day = dayjs()
+  day = dayjs();
+
+  @Input()
+  event?: CalendarEvent;
 
   @Output()
   close = new EventEmitter();
 
   @Output()
   create = new EventEmitter<CalendarEvent>();
+
+  @Output()
+  edit = new EventEmitter<CalendarEvent>();
 
   constructor() { }
 
