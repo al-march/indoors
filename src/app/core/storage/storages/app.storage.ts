@@ -32,6 +32,9 @@ export class AppStorage extends AbstractStorage<AppState> {
     const theme = this.get('theme');
     if (theme) {
       document.documentElement.setAttribute('data-theme', theme);
+    } else {
+      const theme = document.documentElement.dataset['theme'] as Theme
+      this.set('theme', theme);
     }
   }
 }
