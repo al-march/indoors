@@ -41,7 +41,6 @@ export class CreateEventPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(dayjs());
     const date = this.form.get('date');
     if (date) {
       date.valueChanges.pipe(

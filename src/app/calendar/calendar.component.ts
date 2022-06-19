@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
 import { CalendarStorage } from '@storage/storages';
 import { CalendarEvent } from '@calendar/models';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -9,17 +10,32 @@ import { CalendarEvent } from '@calendar/models';
   styleUrls: ['./calendar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
 
   month = dayjs();
-  events$ = this.calendar.eventsChange$;
+  events: Record<number, CalendarEvent[]> = {};
 
   constructor(
     private calendar: CalendarStorage
   ) { }
 
+  private destroy$ = new Subject();
+
   ngOnInit(): void {
-    console.log(crypto);
+    this.calendar.eventsChange$.pipe(
+      takeUntil(this.destroy$),
+    ).subscribe(events => {
+      if (events) {
+        this.events = {...events};
+      } else {
+        this.events = {};
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(null);
+    this.destroy$.complete();
   }
 
   prev() {

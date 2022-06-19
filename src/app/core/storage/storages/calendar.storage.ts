@@ -28,7 +28,7 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
 
   constructor() {
     super('calendar');
-    this.state$$.next(this.getState());
+    this.updateState();
   }
 
   async setEvent(event: CalendarEvent) {
@@ -42,7 +42,7 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
     } else {
       this.set('events', {...events, [key]: [event]});
     }
-    this.state$$.next(this.getState());
+    this.updateState();
     return event;
   }
 
@@ -68,8 +68,8 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
       item.people = event.people;
       item.message = event.message;
 
-      this.state$$.next(this.getState());
       this.update();
+      this.updateState();
       return item;
     }
     throw new Error(`Event with id: ${event.id} not found`);
@@ -81,8 +81,9 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
     if (events[dayKey]) {
       events[dayKey] = events[dayKey].filter(e => e.id !== event.id);
     }
-    this.state$$.next(this.getState());
     this.update();
+    this.updateState();
+    console.log(this.getState());
   }
 
   async getEvents(): Promise<Record<number, CalendarEvent[]>> {
@@ -91,5 +92,9 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
       return events;
     }
     return {};
+  }
+
+  private updateState() {
+    this.state$$.next({...this.getState()});
   }
 }

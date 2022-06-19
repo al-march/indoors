@@ -92,4 +92,17 @@ describe('CalendarStorage', () => {
 
     await storage.setEvent(event);
   });
+  it('should emit if add/remove event', async () => {
+    const event: CalendarEvent = {
+      title: 'title',
+      date: +dayjs().toDate()
+    };
+
+    storage.eventsChange$.subscribe(event => {
+      console.log('eventsChange$', event);
+    });
+
+    const storageEvent = await storage.setEvent(event);
+    await storage.removeEvent(storageEvent);
+  });
 });
