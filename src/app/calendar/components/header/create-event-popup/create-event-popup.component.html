@@ -1,20 +1,21 @@
-<div class="card w-96 bg-base-100 shadow-xl">
-  <header class="flex justify-end p-1">
+<div class="card w-96 bg-base-100 rounded p-2 shadow-xl">
+  <header class="flex items-center justify-between px-1">
+    <h3 class="opacity-60">Новое событие</h3>
     <button class="btn btn-sm btn-ghost" (click)="onClose()">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </header>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card-body pt-2">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card-body p-1">
     <input
       type="text"
-      class="input input-bordered"
+      class="input input-sm input-bordered"
       placeholder="6 марта, 14.00"
       formControlName="date"
       [class.input-error]="date?.touched && date?.invalid"
     >
     <input
       type="text"
-      class="input input-bordered"
+      class="input input-sm input-bordered"
       placeholder="День рождения"
       formControlName="message"
       [class.input-error]="message?.touched && message?.invalid"

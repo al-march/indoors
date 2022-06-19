@@ -26,7 +26,7 @@
 
 .day.is-active {
   @apply
-  ring-accent
+  ring-primary
   ring-2
 }
 
@@ -37,8 +37,7 @@
 
 .day.is-today {
   @apply
-  bg-accent
-  bg-accent-content
+  bg-base-300
 }
 
 .event {
@@ -55,5 +54,5 @@
 
 .event.accent {
   @apply
-  btn-accent
+  btn-primary
 }

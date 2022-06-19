@@ -49,7 +49,6 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('header events', this.events);
     if (changes['events']) {
       this.eventsAsArray = Object.values(this.events).flat();
     }

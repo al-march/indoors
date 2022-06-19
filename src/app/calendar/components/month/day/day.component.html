@@ -10,7 +10,7 @@
     <button
       class="btn btn-xs gap-1 w-full justify-between btn-wide"
       [class.btn-ghost]="!newEventPopup.show"
-      [class.btn-accent]="newEventPopup.show"
+      [class.btn-primary]="newEventPopup.show"
       [disabled]="disabled"
 
       #trigger="popupTrigger"
@@ -20,7 +20,7 @@
       placement="right-start"
     >
       <span class="opacity-80">{{day.date.format('D')}}</span>
-      <span class="badge badge-sm badge-accent" *ngIf="events.length">{{events.length}}</span>
+      <span class="badge badge-sm badge-primary" *ngIf="events.length">{{events.length}}</span>
     </button>
 
     <app-popup #newEventPopup="popup">

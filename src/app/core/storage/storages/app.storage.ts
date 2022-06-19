@@ -2,7 +2,7 @@ import { AbstractStorage } from '@storage/abstract.storage';
 import { Injectable } from '@angular/core';
 
 export const enum Theme {
-  LIGHT = 'winter',
+  LIGHT = 'cmyk',
   DARK = 'business'
 }
 
