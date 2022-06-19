@@ -30,6 +30,7 @@ export class CalendarComponent implements OnInit {
   }
 
   createEvent(event: CalendarEvent) {
+    this.month = dayjs(event.date);
     return this.calendar.setEvent(event);
   }
 

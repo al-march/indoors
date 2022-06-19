@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -31,17 +31,24 @@ export class MonthComponent implements OnInit, OnChanges {
   month: Month = new Month(dayjs());
   days: Day[] = [];
 
-  constructor() { }
+  constructor(
+    private ref: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['date']) {
-      const month = new Month(this.date);
-      this.month = month;
-      this.days = month.getMonthDays();
+      this.updateMonth(this.date);
     }
+  }
+
+  updateMonth(date: Dayjs) {
+    const month = new Month(date);
+    this.month = month;
+    this.days = month.getMonthDays();
+    this.ref.markForCheck();
   }
 
   eventsByDay(day: number) {
