@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Day } from '@calendar/models';
+import { CalendarEvent, Day } from '@calendar/models';
 
 @Component({
   selector: 'app-day',
@@ -11,8 +11,15 @@ export class DayComponent implements OnInit {
   @Input()
   day?: Day;
 
+  @Input()
+  disabled = false;
+
+  @Input()
+  events: CalendarEvent[] = [];
+
   constructor() { }
 
   ngOnInit() {
+
   }
 }

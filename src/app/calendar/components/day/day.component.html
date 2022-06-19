@@ -3,6 +3,21 @@
   class="day"
   [class.is-today]="day.isToday"
   [class.is-weekend]="day.isWeekend"
+  [class.is-disabled]="disabled"
 >
-  <span class="opacity-80">{{day.date.format('D')}}</span>
+  <div class="flex flex-col overflow-hidden">
+    <button
+      class="btn btn-sm gap-1 btn-ghost w-full justify-between btn-wide"
+      [disabled]="disabled"
+    >
+      <span class="opacity-80">{{day.date.format('D')}}</span>
+      <span class="badge badge-sm badge-accent" *ngIf="events.length">{{events.length}}</span>
+    </button>
+
+    <div class="flex flex-col overflow-hidden overflow-y-scroll">
+      <span *ngFor="let event of events" class="w-full truncate">
+        {{event.message}}
+      </span>
+    </div>
+  </div>
 </div>

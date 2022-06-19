@@ -9,12 +9,14 @@ import isoWeek from 'dayjs/plugin/isoWeek.js';
 import weekday from 'dayjs/plugin/weekday.js';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import customParseFormat from 'dayjs/plugin/customParseFormat.js';
+import isBetween from 'dayjs/plugin/isBetween';
 import 'dayjs/locale/ru';
 
 dayjs.extend(isoWeek);
 dayjs.extend(weekday);
 dayjs.extend(localizedFormat);
 dayjs.extend(customParseFormat);
+dayjs.extend(isBetween);
 dayjs.locale('ru');
 
 if (environment.production) {

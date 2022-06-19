@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { Month, Day, CalendarEvent } from '@calendar/models';
 
 @Component({
@@ -14,7 +14,7 @@ export class MonthComponent implements OnInit, OnChanges {
   date = dayjs();
 
   @Input()
-  events: Record<number, CalendarEvent> = {};
+  events: Record<number, CalendarEvent[]> = {};
 
   month: Month = new Month(dayjs());
   days: Day[] = [];
@@ -30,5 +30,17 @@ export class MonthComponent implements OnInit, OnChanges {
       this.month = month;
       this.days = month.getMonthDays();
     }
+  }
+
+  eventsByDay(day: number) {
+    return this.events[day] || [];
+  }
+
+  isDayFromMonth(day: Dayjs) {
+    return day.add(1, 'second').isBetween(
+      this.month.date.startOf('month'),
+      this.month.date.endOf('month'),
+      'millisecond'
+    );
   }
 }

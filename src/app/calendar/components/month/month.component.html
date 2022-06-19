@@ -1,6 +1,8 @@
-<div class="container h-full w-full grid grid-cols-7">
+<div class="container h-full w-full grid grid-cols-7 auto-rows-fr">
   <app-day
     *ngFor="let day of days"
-    [day]="day">
+    [day]="day"
+    [events]="eventsByDay(+day.date.startOf('day').toDate())"
+    [disabled]="!isDayFromMonth(day.date)">
   </app-day>
 </div>
