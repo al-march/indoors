@@ -3,13 +3,15 @@ import { AbstractStorage } from '@storage/abstract.storage';
 import { CalendarEvent } from '@calendar/models';
 import { filter, map, ReplaySubject } from 'rxjs';
 import dayjs from 'dayjs';
+import { v4 } from 'uuid';
+
 
 interface CalendarStorageState {
   events: Record<number, CalendarEvent[]>;
 }
 
 const generateUUID = () => {
-  return crypto.randomUUID();
+  return v4();
 };
 
 @Injectable({

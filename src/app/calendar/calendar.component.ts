@@ -19,6 +19,7 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(crypto);
   }
 
   prev() {
