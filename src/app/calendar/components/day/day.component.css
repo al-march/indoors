@@ -1,21 +1,17 @@
 .day {
   @apply
-  h-full
-  w-full
-  m-auto
+    flex-1
   relative
   transition-opacity
   text-sm
-  p-2
+  p-1
   rounded-none
-  ring-1
-  ring-base-300
-  bg-base-100
 }
 
 .day.is-disabled {
   @apply
   opacity-60
+  ring-base-100
 }
 
 .day.is-weekend {
@@ -28,4 +24,17 @@
   @apply
   bg-primary
   text-primary-content
+}
+
+
+.event {
+  @apply
+  btn
+  btn-xs
+  btn-ghost
+  capitalize
+  text-left
+  w-full
+  inline-block
+  truncate
 }

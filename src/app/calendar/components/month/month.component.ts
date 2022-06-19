@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit, Output,
+  SimpleChanges
+} from '@angular/core';
 import dayjs, { Dayjs } from 'dayjs';
 import { Month, Day, CalendarEvent } from '@calendar/models';
 
@@ -15,6 +23,9 @@ export class MonthComponent implements OnInit, OnChanges {
 
   @Input()
   events: Record<number, CalendarEvent[]> = {};
+
+  @Output()
+  createEvent = new EventEmitter<CalendarEvent>();
 
   month: Month = new Month(dayjs());
   days: Day[] = [];
@@ -42,5 +53,9 @@ export class MonthComponent implements OnInit, OnChanges {
       this.month.date.endOf('month'),
       'millisecond'
     );
+  }
+
+  onCreateEvent(event: CalendarEvent) {
+    this.createEvent.emit(event);
   }
 }

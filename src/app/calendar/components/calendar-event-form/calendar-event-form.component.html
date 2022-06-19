@@ -1,0 +1,38 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="flex flex-col gap-2"
+>
+  <input
+    type="text"
+    class="input input-sm input-bordered"
+    placeholder="Событие"
+    formControlName="title"
+    [class.input-error]="titleInput?.touched && titleInput?.invalid"
+  >
+  <input
+    type="text"
+    class="input input-sm input-bordered"
+    placeholder="День, месяц, год"
+    formControlName="date"
+    [class.input-error]="dateInput?.touched && dateInput?.invalid"
+  >
+  <input
+    type="text"
+    class="input input-sm input-bordered"
+    placeholder="Имена участников"
+    formControlName="people"
+  >
+
+  <textarea
+    class="textarea textarea-bordered"
+    placeholder="Описание"
+    formControlName="message"
+  ></textarea>
+
+  <div class="flex my-4 gap-2">
+    <button type="submit" class="btn btn-sm btn-primary">Готово</button>
+    <button type="button" class="btn btn-sm btn-error">Удалить</button>
+  </div>
+
+</form>

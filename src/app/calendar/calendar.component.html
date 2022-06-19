@@ -13,6 +13,7 @@
   <app-month
     class="flex-1"
     [date]="month"
-    [events]="(events$ | async) || {}">
+    [events]="(events$ | async) || {}"
+    (createEvent)="createEvent($event)">
   </app-month>
 </div>

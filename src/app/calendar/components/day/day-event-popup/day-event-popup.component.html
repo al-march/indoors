@@ -1,0 +1,15 @@
+<div class="card w-72 p-3 rounded bg-base-200 shadow-xl">
+  <header class="flex items-center justify-between">
+    <h4 class="text-center pt-2">{{day?.format('DD MMMM')}}</h4>
+    <button class="btn btn-xs btn-ghost" (click)="close.emit()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </header>
+
+  <span class="divider m-0 mb-2"></span>
+
+  <app-calendar-event-form
+    [date]="day"
+    (create)="create.emit($event)">
+  </app-calendar-event-form>
+</div>

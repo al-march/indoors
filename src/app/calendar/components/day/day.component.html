@@ -5,19 +5,40 @@
   [class.is-weekend]="day.isWeekend"
   [class.is-disabled]="disabled"
 >
-  <div class="flex flex-col overflow-hidden">
+  <div class="flex h-full flex-col overflow-hidden">
     <button
-      class="btn btn-sm gap-1 btn-ghost w-full justify-between btn-wide"
+      class="btn btn-xs gap-1 w-full justify-between btn-wide"
+      [class.btn-ghost]="!newEventPopup.show"
+      [class.btn-accent]="newEventPopup.show"
       [disabled]="disabled"
+
+      #trigger="popupTrigger"
+      [appPopup]="newEventPopup"
+      [closeOnInsideClick]="false"
+      [offset]="[0, 10]"
+      placement="right-start"
     >
       <span class="opacity-80">{{day.date.format('D')}}</span>
       <span class="badge badge-sm badge-accent" *ngIf="events.length">{{events.length}}</span>
     </button>
 
-    <div class="flex flex-col overflow-hidden overflow-y-scroll">
-      <span *ngFor="let event of events" class="w-full truncate">
-        {{event.message}}
-      </span>
+    <app-popup #newEventPopup="popup">
+      <app-day-event-popup
+        [day]="day.date"
+        (close)="trigger.close()"
+        (create)="onCreateEvent($event); trigger.close()">
+      </app-day-event-popup>
+    </app-popup>
+
+    <div class="overflow-hidden h-full overflow-y-scroll">
+      <div class="overflow-scroll">
+        <button
+          *ngFor="let event of events"
+          class="event"
+        >
+          {{event.title}}
+        </button>
+      </div>
     </div>
   </div>
 </div>

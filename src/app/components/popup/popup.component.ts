@@ -4,17 +4,19 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
   selector: 'app-popup',
   exportAs: 'popup',
   template: `
-    <app-portal>
+    <app-portal *ngIf="show">
       <div class="z-10" #el>
-        <ng-container *ngIf="show">
-          <ng-content></ng-content>
-        </ng-container>
+        <ng-content></ng-content>
       </div>
     </app-portal>
   `
 })
 export class PopupComponent {
   @ViewChild('el')
+  set content(el: ElementRef<HTMLDivElement>) {
+    this.el = el;
+  }
+
   el?: ElementRef<HTMLDivElement>;
 
   @Input()
@@ -27,7 +29,6 @@ export class PopupComponent {
   }
 
   close() {
-    console.log('close popup');
     this.show = false;
   }
 }

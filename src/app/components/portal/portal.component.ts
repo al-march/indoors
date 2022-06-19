@@ -39,10 +39,8 @@ export class PortalComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    console.log('portal init', this.portalContent);
     const template = this.portalContent;
     if (template) {
-      console.log('template');
       this.embeddedViewRef = this.viewContainerRef.createEmbeddedView(template);
       this.portalContentRef = this.embeddedViewRef.rootNodes[0];
       this.renderer.appendChild(this.document.body, this.portalContentRef);

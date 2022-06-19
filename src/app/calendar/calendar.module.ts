@@ -11,6 +11,8 @@ import {
 import { PopupModule } from '@components/popup';
 import { CreateEventPopupComponent } from '@calendar/components/header/create-event-popup/create-event-popup.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CalendarEventFormComponent } from './components/calendar-event-form/calendar-event-form.component';
+import { DayEventPopupComponent } from './components/day/day-event-popup/day-event-popup.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MonthComponent,
     DayComponent,
     NavigationComponent,
-    CreateEventPopupComponent
+    CreateEventPopupComponent,
+    CalendarEventFormComponent,
+    DayEventPopupComponent
   ],
   exports: [
     CalendarComponent

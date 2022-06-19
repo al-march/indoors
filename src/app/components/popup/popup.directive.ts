@@ -48,15 +48,15 @@ export class PopupDirective implements OnChanges {
   }
 
   open() {
-    if (this.appPopup) {
-      this.appPopup.open();
-      this.instance?.destroy();
+    this.appPopup?.open();
+    this.instance?.destroy();
+    /*Ждем когда setter в Popup обнаружит контент под *ngIf*/
+    setTimeout(() => {
       this.createPopper();
-    }
+    })
   }
 
   close() {
-    console.log('close from directive');
     if (this.appPopup) {
       this.appPopup.close();
       this.instance?.destroy();

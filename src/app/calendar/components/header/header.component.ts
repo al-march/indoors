@@ -35,11 +35,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onCreateEvent(data: CreateEventPopupSubmit) {
-    console.log(data);
     const event: CalendarEvent = {
       date: +data.date.toDate(),
-      message: data.message,
-      people: []
+      title: data.message,
     };
     this.createEvent.emit(event);
   }
