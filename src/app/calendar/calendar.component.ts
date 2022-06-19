@@ -43,6 +43,12 @@ export class CalendarComponent implements OnInit {
     });
   }
 
+  deleteEvent(event: CalendarEvent) {
+    return this.calendar.removeEvent(event).catch(e => {
+      alert(e);
+    });
+  }
+
   today() {
     this.month = dayjs();
   }

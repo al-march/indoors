@@ -26,6 +26,9 @@ export class DayComponent implements OnInit {
   @Output()
   editEvent = new EventEmitter<CalendarEvent>();
 
+  @Output()
+  deleteEvent = new EventEmitter<CalendarEvent>();
+
   constructor() { }
 
   ngOnInit() {

@@ -24,6 +24,9 @@ export class DayEventPopupComponent implements OnInit {
   @Output()
   edit = new EventEmitter<CalendarEvent>();
 
+  @Output()
+  delete = new EventEmitter<CalendarEvent>();
+
   constructor() { }
 
   ngOnInit(): void {

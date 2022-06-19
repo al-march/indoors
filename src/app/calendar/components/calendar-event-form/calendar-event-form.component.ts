@@ -22,6 +22,9 @@ export class CalendarEventFormComponent implements OnInit {
   @Output()
   edit = new EventEmitter<CalendarEvent>();
 
+  @Output()
+  delete = new EventEmitter<CalendarEvent>();
+
   format = 'D, MMMM, YYYY';
 
   get isEdit() {
@@ -99,5 +102,11 @@ export class CalendarEventFormComponent implements OnInit {
     this.isEdit
       ? this.edit.emit(event)
       : this.create.emit(event);
+  }
+
+  onDelete() {
+    if (this.isEdit) {
+      this.delete.emit(this.event);
+    }
   }
 }

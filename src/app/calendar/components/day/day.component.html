@@ -50,7 +50,8 @@
               [day]="day.date"
               [event]="event"
               (close)="editTrigger.close()"
-              (edit)="onEditEvent($event); editTrigger.close()">
+              (edit)="onEditEvent($event); editTrigger.close()"
+              (delete)="deleteEvent.emit($event); editTrigger.close()">
             </app-day-event-popup>
           </app-popup>
         </button>

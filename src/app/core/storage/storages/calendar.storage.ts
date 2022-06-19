@@ -66,10 +66,21 @@ export class CalendarStorage extends AbstractStorage<CalendarStorageState> {
       item.people = event.people;
       item.message = event.message;
 
+      this.state$$.next(this.getState());
       this.update();
       return item;
     }
     throw new Error(`Event with id: ${event.id} not found`);
+  }
+
+  async removeEvent(event: CalendarEvent) {
+    const dayKey = +dayjs(event.date).startOf('day').toDate();
+    const events = await this.getEvents();
+    if (events[dayKey]) {
+      events[dayKey] = events[dayKey].filter(e => e.id !== event.id);
+    }
+    this.state$$.next(this.getState());
+    this.update();
   }
 
   async getEvents(): Promise<Record<number, CalendarEvent[]>> {

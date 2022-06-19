@@ -10,7 +10,9 @@
     [day]="day"
     [events]="eventsByDay(+day.date.startOf('day').toDate())"
     [disabled]="!isDayFromMonth(day.date)"
+
     (createEvent)="onCreateEvent($event)"
-    (editEvent)="onEditEvent($event)">
+    (editEvent)="onEditEvent($event)"
+    (deleteEvent)="onDeleteEvent($event)">
   </app-day>
 </div>

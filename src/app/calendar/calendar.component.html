@@ -15,6 +15,7 @@
     [date]="month"
     [events]="(events$ | async) || {}"
     (createEvent)="createEvent($event)"
-    (editEvent)="editEvent($event)">
+    (editEvent)="editEvent($event)"
+    (deleteEvent)="deleteEvent($event)">
   </app-month>
 </div>

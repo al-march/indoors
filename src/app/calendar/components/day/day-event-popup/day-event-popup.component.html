@@ -15,7 +15,9 @@
   <app-calendar-event-form
     [date]="day"
     [event]="event"
+
     (create)="create.emit($event)"
-    (edit)="edit.emit($event)">
+    (edit)="edit.emit($event)"
+    (delete)="delete.emit($event)">
   </app-calendar-event-form>
 </div>
