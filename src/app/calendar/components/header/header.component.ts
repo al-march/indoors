@@ -11,6 +11,7 @@ import {
 import { AppStorage, Theme } from '@storage/storages';
 import { CreateEventPopupSubmit } from '@calendar/components';
 import { CalendarEvent } from '@calendar/models';
+import dayjs, { Dayjs } from 'dayjs';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,9 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   @Output()
   createEvent = new EventEmitter<CalendarEvent>();
+
+  @Output()
+  activateDay = new EventEmitter<Dayjs>();
 
   themes = {
     dark: Theme.DARK,
@@ -61,5 +65,10 @@ export class HeaderComponent implements OnInit, OnChanges {
       title: data.message,
     };
     this.createEvent.emit(event);
+  }
+
+  onActivateDay(event: CalendarEvent) {
+    const day = dayjs(event.date).startOf('day');
+    this.activateDay.emit(day);
   }
 }

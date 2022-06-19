@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CalendarEvent, Day } from '@calendar/models';
+import dayjs, { Dayjs } from 'dayjs';
 
 @Component({
   selector: 'app-day',
@@ -20,6 +21,9 @@ export class DayComponent implements OnInit {
   @Input()
   events: CalendarEvent[] = [];
 
+  @Input()
+  active?: Dayjs;
+
   @Output()
   createEvent = new EventEmitter<CalendarEvent>();
 
@@ -29,6 +33,15 @@ export class DayComponent implements OnInit {
   @Output()
   deleteEvent = new EventEmitter<CalendarEvent>();
 
+  get isActive() {
+    const day = this.day?.date.startOf('day');
+    const activeDay = dayjs(this.active).startOf('day');
+    if (day && activeDay) {
+      return +day.toDate() === +activeDay.toDate();
+    }
+    return false;
+  }
+
   constructor() { }
 
   ngOnInit() {
@@ -36,10 +49,10 @@ export class DayComponent implements OnInit {
   }
 
   onCreateEvent(event: CalendarEvent) {
-    this.createEvent.emit(event)
+    this.createEvent.emit(event);
   }
 
   onEditEvent(event: CalendarEvent) {
-    this.editEvent.emit(event)
+    this.editEvent.emit(event);
   }
 }

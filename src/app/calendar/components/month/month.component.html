@@ -10,6 +10,7 @@
     [day]="day"
     [events]="eventsByDay(+day.date.startOf('day').toDate())"
     [disabled]="!isDayFromMonth(day.date)"
+    [active]="activeDay"
 
     (createEvent)="onCreateEvent($event)"
     (editEvent)="onEditEvent($event)"

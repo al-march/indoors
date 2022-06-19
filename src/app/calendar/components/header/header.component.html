@@ -23,7 +23,8 @@
       <div class="form-control lg:w-1/3">
         <div class="input-group w-full flex">
           <app-search-event
-            [events]="eventsAsArray">
+            [events]="eventsAsArray"
+            (check)="onActivateDay($event)">
           </app-search-event>
         </div>
       </div>

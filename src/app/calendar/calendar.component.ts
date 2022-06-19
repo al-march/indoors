@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { CalendarStorage } from '@storage/storages';
 import { CalendarEvent } from '@calendar/models';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,6 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class CalendarComponent implements OnInit, OnDestroy {
 
   month = dayjs();
+  activeDay = dayjs();
   events: Record<number, CalendarEvent[]> = {};
 
   constructor(
@@ -46,15 +47,21 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.month = this.month.add(1, 'month');
   }
 
+  setMonth(day: Dayjs) {
+    if (+this.month.startOf('month').toDate() !== +day.startOf('month').toDate()) {
+      this.month = day;
+    }
+  }
+
   createEvent(event: CalendarEvent) {
-    this.month = dayjs(event.date);
+    this.setMonth(dayjs(event.date));
     return this.calendar.setEvent(event).catch(e => {
       alert(e);
     });
   }
 
   editEvent(event: CalendarEvent) {
-    this.month = dayjs(event.date);
+    this.setMonth(dayjs(event.date));
     return this.calendar.updateEvent(event).catch(e => {
       alert(e);
     });
@@ -66,7 +73,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
     });
   }
 
+  activateDay(day: Dayjs) {
+    this.setMonth(day);
+    this.activeDay = day;
+  }
+
   today() {
-    this.month = dayjs();
+    this.setMonth(dayjs());
   }
 }

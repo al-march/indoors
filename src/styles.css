@@ -24,16 +24,21 @@
   ring-base-100
 }
 
+.day.is-active {
+  @apply
+  ring-accent
+  ring-2
+}
+
 .day.is-weekend {
   @apply
-  bg-warning
-  text-warning-content
+  bg-base-200
 }
 
 .day.is-today {
   @apply
-  bg-primary
-  text-primary-content
+  bg-accent
+  bg-accent-content
 }
 
 .event {
