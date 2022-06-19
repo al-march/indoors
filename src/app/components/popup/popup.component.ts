@@ -1,8 +1,9 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-popup',
   exportAs: 'popup',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-portal *ngIf="show">
       <div class="z-10" #el>
@@ -22,13 +23,17 @@ export class PopupComponent {
   @Input()
   show = false;
 
-  constructor() {}
+  constructor(
+    private ref: ChangeDetectorRef
+  ) {}
 
   open() {
     this.show = true;
+    this.ref.markForCheck();
   }
 
   close() {
     this.show = false;
+    this.ref.markForCheck();
   }
 }

@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import dayjs from 'dayjs';
 import { CalendarEvent } from '@calendar/models';
 
 @Component({
   selector: 'app-day-event-popup',
   templateUrl: './day-event-popup.component.html',
-  styleUrls: ['./day-event-popup.component.css']
+  styleUrls: ['./day-event-popup.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DayEventPopupComponent implements OnInit {
 

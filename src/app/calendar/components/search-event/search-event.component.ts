@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CalendarEvent } from '@calendar/models';
 
@@ -6,6 +6,7 @@ import { CalendarEvent } from '@calendar/models';
   selector: 'app-search-event',
   templateUrl: './search-event.component.html',
   styleUrls: ['./search-event.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'w-full'
   }

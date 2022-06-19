@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import dayjs, { Dayjs } from 'dayjs';
 import { debounceTime, tap } from 'rxjs';
@@ -11,7 +11,8 @@ export interface CreateEventPopupSubmit {
 @Component({
   selector: 'app-create-event-popup',
   templateUrl: './create-event-popup.component.html',
-  styleUrls: ['./create-event-popup.component.css']
+  styleUrls: ['./create-event-popup.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateEventPopupComponent implements OnInit {
 

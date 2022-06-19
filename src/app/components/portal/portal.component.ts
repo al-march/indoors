@@ -1,9 +1,9 @@
 import {
   AfterViewInit,
-  ApplicationRef,
+  ApplicationRef, ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   EmbeddedViewRef,
-  Inject,
+  Inject, OnDestroy,
   OnInit,
   Renderer2,
   TemplateRef,
@@ -17,13 +17,14 @@ import { CommonModule, DOCUMENT } from '@angular/common';
   selector: 'app-portal',
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-template>
       <ng-content></ng-content>
     </ng-template>
   `
 })
-export class PortalComponent implements OnInit, AfterViewInit {
+export class PortalComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(TemplateRef)
   portalContent?: TemplateRef<HTMLElement>;
@@ -35,7 +36,8 @@ export class PortalComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: Document,
     private applicationRef: ApplicationRef,
     private viewContainerRef: ViewContainerRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private ref: ChangeDetectorRef,
   ) { }
 
   ngAfterViewInit() {
@@ -45,10 +47,10 @@ export class PortalComponent implements OnInit, AfterViewInit {
       this.portalContentRef = this.embeddedViewRef.rootNodes[0];
       this.renderer.appendChild(this.document.body, this.portalContentRef);
     }
+    this.ref.markForCheck();
   }
 
   ngOnInit(): void {
-
   }
 
   ngOnDestroy() {

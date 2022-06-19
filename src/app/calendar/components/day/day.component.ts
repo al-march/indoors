@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CalendarEvent, Day } from '@calendar/models';
 import dayjs, { Dayjs } from 'dayjs';
 
@@ -6,6 +13,7 @@ import dayjs, { Dayjs } from 'dayjs';
   selector: 'app-day',
   templateUrl: './day.component.html',
   styleUrls: ['./day.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'h-full flex items-stretch justify-stretch ring-1 ring-base-300 bg-base-100'
   }
@@ -45,7 +53,6 @@ export class DayComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
   }
 
   onCreateEvent(event: CalendarEvent) {

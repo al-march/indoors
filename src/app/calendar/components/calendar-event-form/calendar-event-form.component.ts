@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CalendarEvent } from '@calendar/models';
 import { FormBuilder, Validators } from '@angular/forms';
 import dayjs, { Dayjs } from 'dayjs';
@@ -6,7 +6,8 @@ import dayjs, { Dayjs } from 'dayjs';
 @Component({
   selector: 'app-calendar-event-form',
   templateUrl: './calendar-event-form.component.html',
-  styleUrls: ['./calendar-event-form.component.css']
+  styleUrls: ['./calendar-event-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarEventFormComponent implements OnInit {
 
@@ -93,9 +94,11 @@ export class CalendarEventFormComponent implements OnInit {
 
     this.emitSubmit(event);
 
-    this.form.reset({
-      date: this.date?.format(this.format) || ''
-    });
+    if (!this.isEdit) {
+      this.form.reset({
+        date: this.date?.format(this.format) || ''
+      });
+    }
   }
 
   emitSubmit(event: CalendarEvent) {
