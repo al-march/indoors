@@ -1,0 +1,28 @@
+<input
+  type="text"
+  placeholder="Событие, дата или участник"
+  class="input input-sm w-full input-bordered flex-1"
+  #input
+  #trigger="popupTrigger"
+  [formControl]="searchControl"
+  [appPopup]="searchPopup"
+  [offset]="[0, 10]"
+  (input)="trigger.open()"
+>
+<app-popup #searchPopup>
+  <ul
+    [style.width]="input.offsetWidth + 'px'"
+    class="menu bg-base-200 shadow-2xl rounded max-h-56 overflow-y-scroll"
+  >
+    <ng-container *ngIf="(events | searchEvent:input.value) as filteredEvents">
+      <button *ngIf="!filteredEvents.length" class="btn btn-ghost normal-case">
+        Событий не найдено
+      </button>
+      <app-search-item
+        *ngFor="let event of filteredEvents"
+        [event]="event"
+        (click)="check.emit(event)">
+      </app-search-item>
+    </ng-container>
+  </ul>
+</app-popup>

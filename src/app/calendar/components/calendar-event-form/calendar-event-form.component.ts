@@ -68,7 +68,7 @@ export class CalendarEventFormComponent implements OnInit {
         title: this.event?.title || '',
         date: dayjs(this.event?.date)?.format(this.format) || '',
         message: this.event?.message || '',
-        people: this.event?.people?.join(', ')
+        people: this.event?.people?.join(',')
       });
     }
   }
@@ -87,7 +87,7 @@ export class CalendarEventFormComponent implements OnInit {
       id: this.event?.id || '',
       title: this.titleInput?.value || '',
       date: parseDate(),
-      people: this.peopleInput?.value?.split(' ') || [''],
+      people: this.peopleInput?.value?.split(',') || [''],
       message: this.messageInput?.value || ''
     };
 

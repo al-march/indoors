@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '@components/navbar';
 import { CalendarComponent } from './calendar.component';
+import { PopupModule } from '@components/popup';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
+  CreateEventPopupComponent,
   DayComponent,
   HeaderComponent,
   MonthComponent,
-  NavigationComponent
+  NavigationComponent,
+  CalendarEventFormComponent,
+  DayEventPopupComponent,
+  SearchEventModule
 } from './components';
-import { PopupModule } from '@components/popup';
-import { CreateEventPopupComponent } from '@calendar/components/header/create-event-popup/create-event-popup.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CalendarEventFormComponent } from './components/calendar-event-form/calendar-event-form.component';
-import { DayEventPopupComponent } from './components/day/day-event-popup/day-event-popup.component';
-
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { DayEventPopupComponent } from './components/day/day-event-popup/day-eve
     NavigationComponent,
     CreateEventPopupComponent,
     CalendarEventFormComponent,
-    DayEventPopupComponent
+    DayEventPopupComponent,
   ],
   exports: [
     CalendarComponent
@@ -33,7 +33,8 @@ import { DayEventPopupComponent } from './components/day/day-event-popup/day-eve
     CommonModule,
     NavbarComponent,
     PopupModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SearchEventModule
   ]
 })
 export class CalendarModule {}
