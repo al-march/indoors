@@ -1,4 +1,3 @@
 .month {
-  @apply h-full w-full grid grid-cols-7 auto-rows-fr;
-  grid-template-rows: min-content;
+  @apply h-full w-full grid grid-cols-7;
 }

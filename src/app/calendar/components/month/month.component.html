@@ -1,4 +1,10 @@
-<div class="container month">
+<div class="container w-full grid grid-cols-7">
+  <span *ngFor="let day of week" class="text-center">
+    {{day}}
+  </span>
+</div>
+
+<div class="container month gap-1">
   <app-day
     *ngFor="let day of days"
     [day]="day"

@@ -1,11 +1,11 @@
 <div
   *ngIf="day"
-  class="day"
+  class="day relative"
   [class.is-today]="day.isToday"
   [class.is-weekend]="day.isWeekend"
   [class.is-disabled]="disabled"
 >
-  <div class="flex h-full flex-col overflow-hidden">
+  <div class="flex flex-col absolute left-0 right-0 top-0 p-1 max-h-full">
     <button
       class="btn btn-xs gap-1 w-full justify-between btn-wide"
       [class.btn-ghost]="!newEventPopup.show"
